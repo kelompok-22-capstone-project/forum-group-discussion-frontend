@@ -12,6 +12,17 @@ const routes = [
   // {path: '/yourthread', name: 'YourThread', component: YourThread},
   // {path: '/login', name: 'LoginView', component: LoginView},
   // {path: '/register', name: 'RegisterView', component: RegisterView},
+
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "login" */ '../pages/user/login.vue')
+  },
+  {
+    path: '/regist',
+    name: 'Regist',
+    component: () => import(/* webpackChunkName: "regist" */ '../pages/user/regist.vue')
+  }
 ]
 
 const router = new VueRouter({

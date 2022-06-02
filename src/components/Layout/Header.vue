@@ -22,10 +22,15 @@
         </v-text-field>
       </v-responsive>
       <v-spacer></v-spacer>
+
+      <router-link to="/login">
       <v-btn depressed color="primary" class="rounded-lg mr-5"> Login </v-btn>
-      <v-btn rounded depressed color="error" class="rounded-lg">
-        Register
-      </v-btn>
+      </router-link>
+
+      <router-link to="/regist">
+      <v-btn rounded depressed color="error" class="rounded-lg">Register</v-btn>
+      </router-link>
+
     </v-app-bar>
   </v-app>
 </template>
