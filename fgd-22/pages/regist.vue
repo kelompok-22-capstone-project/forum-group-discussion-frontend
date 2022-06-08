@@ -152,9 +152,11 @@ export default {
         })
         .then((res) => {
           console.log(res);
+          alert("Register Success");
         })
         .catch((err) => {
           console.log(err);
+          alert("Register Failed")
         });
       console.log(response);
     },
