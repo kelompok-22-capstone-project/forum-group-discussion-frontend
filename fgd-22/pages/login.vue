@@ -22,13 +22,14 @@
                           src="img/logo.svg"
                         ></v-img>
                         <v-text-field
-                          label="Email"
+                          label="User Name"
                           outlined
                           dense
-                          :rules="emailRules"
+                          :rules="userRules"
                           color="blue"
                           autocomplete="false"
                           class="mt-16"
+                          v-model="username"
                         />
 
                         <v-text-field
@@ -39,13 +40,19 @@
                           color="blue"
                           autocomplete="false"
                           type="password"
+                          v-model="password"
                         />
 
                         <v-row>
                           <v-col cols="12" sm="7"> </v-col>
                         </v-row>
 
-                        <v-btn color="primary" dark block elevation="5"
+                        <v-btn
+                          @click="handleLoginClicked"
+                          color="primary"
+                          dark
+                          block
+                          elevation="5"
                           >Log in</v-btn
                         >
 
@@ -81,19 +88,34 @@ export default {
   name: "LoginPage",
   data: () => ({
     valid: true,
-    name: "",
+    username: "",
+    userRules: [(v) => !!v || "email can not be empty"],
+    password: "",
     passRules: [
       (v) => !!v || "Password is require",
       (v) => (v && v.length >= 8) || "Name must be less than 10 characters",
     ],
-    email: "",
-    emailRules: [
-      (v) => !!v || "email can not be empty",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-    ],
     checkbox: false,
   }),
-};
+  methods: {
+    async handleLoginClicked() {
+      // const user = {
+      //   username: this.username,
+      //   password: this.password,
+      // };
+
+      try {
+        const response = await this.$auth.loginWith("local", {data:{username: this.username, password: this.password} },);
+        console.log(response);
+        if (response.data.success) {
+          this.$router.replace({ name: "admin" });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+};  
 </script>
 
 <style scoped>

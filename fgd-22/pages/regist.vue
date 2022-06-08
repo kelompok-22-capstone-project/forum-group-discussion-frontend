@@ -21,56 +21,67 @@
                           max-width="190px"
                           src="img/getstarted.svg"
                         ></v-img>
-                        <v-text-field
-                          label="Email"
-                          outlined
-                          dense
-                          placeholder="e.g lets.moot@example.com"
-                          :rules="emailRules"
-                          color="blue"
-                          autocomplete="false"
-                          class="mt-16"
-                        />
-                        <v-text-field
-                          label="Display Name"
-                          outlined
-                          dense
-                          placeholder="e.g Calry Nimbu"
-                          :rules="nameRules"
-                          color="blue"
-                          autocomplete="false"
-                          type="text"
-                        />
+                        <v-form ref="form" v-model="valid" lazy-validation>
+                          <v-text-field
+                            label="Email"
+                            outlined
+                            dense
+                            placeholder="e.g lets.moot@example.com"
+                            :rules="emailRules"
+                            color="blue"
+                            autocomplete="false"
+                            class="mt-16"
+                            v-model="email"
+                          />
+                          <v-text-field
+                            label="Display Name"
+                            outlined
+                            dense
+                            placeholder="e.g Calry Nimbu"
+                            :rules="nameRules"
+                            color="blue"
+                            autocomplete="false"
+                            type="text"
+                            v-model="name"
+                          />
 
-                        <v-text-field
-                          label="Username"
-                          outlined
-                          dense
-                          placeholder="e.g @let's.moot"
-                          :rules="userRules"
-                          color="blue"
-                          autocomplete="false"
-                          type="text"
-                        />
+                          <v-text-field
+                            label="Username"
+                            outlined
+                            dense
+                            placeholder="e.g @let's.moot"
+                            :rules="userRules"
+                            color="blue"
+                            autocomplete="false"
+                            type="text"
+                            v-model="username"
+                          />
 
-                        <v-text-field
-                          label="Password"
-                          outlined
-                          dense
-                          placeholder="careful, follow the require"
-                          :rules="passRules"
-                          color="blue"
-                          autocomplete="false"
-                          type="password"
-                        />
+                          <v-text-field
+                            label="Password"
+                            outlined
+                            dense
+                            placeholder="careful, follow the require"
+                            :rules="passRules"
+                            color="blue"
+                            autocomplete="false"
+                            type="password"
+                            v-model="password"
+                          />
 
-                        <v-row>
-                          <v-col cols="12" sm="7"> </v-col>
-                        </v-row>
+                          <v-row>
+                            <v-col cols="12" sm="7"> </v-col>
+                          </v-row>
 
-                        <v-btn color="primary" dark block elevation="5"
-                          >Register</v-btn
-                        >
+                          <v-btn
+                            color="primary"
+                            dark
+                            block
+                            elevation="5"
+                            @click="validate"
+                            >Register</v-btn
+                          >
+                        </v-form>
 
                         <v-col cols="6" sm="12">
                           <span class="caption blue--text"
@@ -123,9 +134,31 @@ export default {
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
     checkbox: false,
+
+    email: "",
+    name: "",
+    username: "",
+    password: "",
   }),
 
-  methods: {},
+  methods: {
+    async validate() {
+      const response = await this.$axios
+        .$post("https://moot-rest-api.herokuapp.com/api/v1/register", {
+          username: this.username,
+          email: this.email,
+          name: this.name,
+          password: this.password,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log(response);
+    },
+  },
 };
 </script>
 <style scoped>
