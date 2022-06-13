@@ -1,7 +1,6 @@
 <template>
-  <v-card class="mx-auto" max-width="1550" >
-    
 
+  <v-card class="mx-auto" max-width="1550" elevation="5">
     <v-card-text class="text-h3 font-weight-black">
       7 Fitur Penting di Smarthpone yang Bisa Memanjakan Manusia
     </v-card-text>
@@ -35,13 +34,20 @@
     </v-card-text>
 
     <v-card-actions>
-        <v-icon class="mr-1">mdi-thumb-up-outline</v-icon>
-        <span class="subheading mr-2">256</span>
-        <span class="mr-1">·</span>
-        <v-icon class="mr-1">mdi-share-variant</v-icon>
-        <span class="subheading">45</span>
-    </v-card-actions>
 
+        <v-col cols="12" sm="3">
+            <v-btn icon color="dark">
+              <v-icon>mdi-thumb-up-outline</v-icon>
+            </v-btn>
+            <span class="subheading mr-2">256</span>
+            
+            <v-btn icon color="dark">
+              <v-icon>mdi-bookmark-outline</v-icon>
+            </v-btn>
+            <span class="subheading mr-2">45 Follow this tread</span>
+        </v-col>
+
+    </v-card-actions>
   </v-card>
 </template>
 
