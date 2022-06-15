@@ -1,8 +1,8 @@
 <template>
 
-  <v-card class="mx-auto" max-width="1550" elevation="5">
-    <v-card-text class="text-h3 font-weight-black">
-      7 Fitur Penting di Smarthpone yang Bisa Memanjakan Manusia
+  <v-card class="mx-auto rounded-lg" max-width="1550" elevation="5">
+    <v-card-text class="text-h3 d-inline-block text-truncate" style="max-width: 1400px">
+      7 Fitur Penting di Smarthpone yang Bisa Memanjakan Para Gamerssssss
     </v-card-text>
 
     <v-card-actions>
