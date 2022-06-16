@@ -10,17 +10,29 @@
         <img src="img/logo.svg" height="50" />
       </v-btn>
       <v-spacer></v-spacer>
-      <v-responsive max-width="500">
+      <!-- <v-card width="450px" class="pl-2 mx-3 rounded-lg">
         <v-text-field
+          filled
           label="Search"
           dense
           flat
-          elevation="5"
+          elevation="1"
           hide-details
           solo-inverted
+          prepend-icon="mdi-magnify"
         >
         </v-text-field>
-      </v-responsive>
+      </v-card> -->
+      <v-text-field
+          dense
+          flat
+          placeholder="Search"
+          hide-details
+          rounded
+          solo-inverted
+          prepend-icon="mdi-magnify"
+        >
+        </v-text-field>
       <v-spacer></v-spacer>
 
       <v-btn to="/login" depressed color="primary" class="rounded-lg mr-5">
