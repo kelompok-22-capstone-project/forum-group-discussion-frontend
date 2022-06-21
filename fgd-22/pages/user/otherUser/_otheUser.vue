@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import Cards from "../../components/Cards.vue";
+import Cards from "../../../components/Cards.vue";
 
 export default {
   name: "otherUserPage",

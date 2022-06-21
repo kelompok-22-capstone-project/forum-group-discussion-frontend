@@ -7,34 +7,24 @@
       app
     >
       <v-btn text disabled>
-        <img src="img/logo.svg" height="50" />
+        <img src="img/moot.png" height="50" />
       </v-btn>
       <v-spacer></v-spacer>
-      <!-- <v-card width="450px" class="pl-2 mx-3 rounded-lg">
-        <v-text-field
-          filled
-          label="Search"
-          dense
-          flat
-          elevation="1"
-          hide-details
-          solo-inverted
-          prepend-icon="mdi-magnify"
-        >
-        </v-text-field>
-      </v-card> -->
+
       <v-text-field
-          dense
-          flat
-          placeholder="Search"
-          hide-details
-          rounded
-          solo-inverted
-          prepend-icon="mdi-magnify"
-        >
-        </v-text-field>
+        dense
+        flat
+        placeholder="Search"
+        hide-details
+        rounded
+        solo-inverted
+        class="rounded-lg"
+        append-icon="mdi-magnify"
+      >
+      </v-text-field>
       <v-spacer></v-spacer>
 
+      <!-- <div v-if="login === true"> -->
       <v-btn to="/login" depressed color="primary" class="rounded-lg mr-5">
         Login
       </v-btn>
@@ -42,6 +32,12 @@
       <v-btn to="/regist" rounded depressed color="error" class="rounded-lg"
         >Register</v-btn
       >
+      <!-- </div> -->
+      <!-- <div v-else>
+        <v-btn to="/" rounded depressed color="error" class="rounded-lg"
+          >Logout</v-btn
+        >
+      </div> -->
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" :clipped="clipped" app class="mx-5">
       <template v-slot:prepend>
@@ -61,47 +57,129 @@
 
       <v-spacer></v-spacer>
 
-      <v-list v-for="[icon, text] in links" :key="icon" link class="ml-2 mr-2">
-        <v-hover v-slot="{ hover }">
+      <v-hover v-slot="{ hover }">
+        <v-btn
+          width="225px"
+          elevation="0"
+          to="/"
+          class="justify-start rounded-lg no-uppercase"
+          :style="{
+            'background-color': hover ? '#1976D2' : '#fff',
+            color: hover ? '#fff' : '#1976D2',
+          }"
+        >
+          <v-icon>mdi-home-outline</v-icon>
+          <span class="ml-4">Home</span>
+        </v-btn>
+      </v-hover>
+
+      <v-hover v-slot="{ hover }">
+        <v-btn
+          width="225px"
+          to="user/thread"
+          elevation="0"
+          class="justify-start rounded-lg no-uppercase"
+          :style="{
+            'background-color': hover ? '#1976D2' : '#fff',
+            color: hover ? '#fff' : '#1976D2',
+          }"
+        >
+          <v-icon>mdi-file-document-outline</v-icon>
+          <span class="ml-4">Your Thread</span>
+        </v-btn>
+      </v-hover>
+
+      <div class="ml-5 mr-5 mb-6 mt-6">
+        <h4 style="color: #000">Category</h4>
+        <v-list v-for="list in kategori" :key="list">
           <v-btn
+            :to="{ name: 'category', params: { category: list.text } }"
             width="225px"
             elevation="0"
-            class="justify-start rounded-lg"
+            class="justify-start rounded-lg no-uppercase"
             :style="{
-              'background-color': hover ? '#ff5252' : '#fff',
-              color: hover ? '#fff' : '#ff5252',
+              'background-color': hover ? '#1976D2' : '#fff',
+              color: hover ? '#fff' : '#1976D2',
             }"
           >
-            <v-icon>{{ icon }}</v-icon>
-            <span class="ml-4">{{ text }}</span>
+            {{ list.text }}
           </v-btn>
-        </v-hover>
-      </v-list>
-
-      <v-spacer></v-spacer>
-
-      <div class="mt-10 ml-5 mr-5">
-        <h4 style="color: #1d3557">Category</h4>
-        <v-list
-          v-for="list in kategori"
-          :key="list.text"
-          link
-          v-model="selection"
-        >
-          <v-hover v-slot="{ hover }">
-            <v-btn
-              width="200px"
-              elevation="0"
-              class="justify-start pl-2 pr-2 ml-3 rounded-lg no-uppercase"
-              :style="{
-                'background-color': hover ? '#1976D2' : '#fff',
-                color: hover ? '#fff' : '#1976D2',
-              }"
-              >{{ list.text }}</v-btn
-            >
-          </v-hover>
         </v-list>
       </div>
+
+      <v-hover v-slot="{ hover }">
+        <v-btn
+          width="225px"
+          elevation="0"
+          class="justify-start rounded-lg no-uppercase mb-6"
+          :style="{
+            'background-color': hover ? '#1976D2' : '#fff',
+            color: hover ? '#fff' : '#1976D2',
+          }"
+        >
+          <v-icon>mdi-crown-outline</v-icon>
+          <span class="ml-4">Ranking</span>
+        </v-btn>
+      </v-hover>
+      <v-hover v-slot="{ hover }">
+        <v-dialog>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              width="225px"
+              elevation="0"
+              class="justify-start rounded-lg no-uppercase"
+              :style="{
+                'background-color': hover ? '#fff' : '#1976D2',
+                color: hover ? '#1976D2' : '#fff',
+              }"
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon>mdi-plus</v-icon>
+              <span class="ml-4">Create Thread</span>
+            </v-btn>
+          </template>
+
+          <v-card class="pa-5">
+            <v-col cols="12" sm="6" md="12">
+              <v-card-title>
+                <span class="text-h5">User Profile</span>
+              </v-card-title>
+            </v-col>
+
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="2" sm="6" md="12">
+                    <v-text-field
+                      label="Title"
+                      placeholder="Title"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+
+                  <v-col cols="2" md="12">
+                    <v-textarea
+                      outlined
+                      name="input-7-4"
+                      label="Description"
+                    ></v-textarea>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="dialog = false">
+                Close
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="dialog = false">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-hover>
     </v-navigation-drawer>
     <v-main>
       <v-container>
@@ -118,13 +196,8 @@ export default {
     loading: false,
     selection: 1,
     drawer: true,
-    // active: true,
     clipped: true,
     fixed: true,
-    links: [
-      ["mdi-monitor", "Home"],
-      ["mdi-message-text", "Your Thread"],
-    ],
     kategori: [{ text: "Makanan" }, { text: "Mikinin" }, { text: "Mukunun" }],
     cards: ["Today", "Yesterday"],
   }),
@@ -134,5 +207,10 @@ export default {
 <style scoped>
 .no-uppercase {
   text-transform: unset !important;
+}
+.v-select__selection,
+.v-select__selection--comma,
+.v-select.v-text-field input {
+  color: blue !important;
 }
 </style>

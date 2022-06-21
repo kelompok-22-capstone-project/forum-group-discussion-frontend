@@ -97,6 +97,12 @@ export default {
     ],
     checkbox: false,
   }),
+
+  // httpHeaders: () => ({
+  //   "Content-Type": "application/json",
+  //   "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+  // }),
+
   methods: {
     async handleLoginClicked() {
       // const user = {
@@ -104,18 +110,56 @@ export default {
       //   password: this.password,
       // };
 
+      //       console.log(this.username);
+      //       console.log(this.password);
+
+      //       var url = "https://moot-rest-api.herokuapp.com/api/v1/login";
+
+      //       var xhr = new XMLHttpRequest();
+      //       xhr.open("POST", url);
+
+      //       xhr.setRequestHeader("accept", "application/json");
+      //       xhr.setRequestHeader(
+      //         "API-Key",
+      //         "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j"
+      //       );
+      //       xhr.setRequestHeader("Content-Type", "application/json");
+
+      //       xhr.onreadystatechange = function () {
+      //         if (xhr.readyState === 4) {
+      //           console.log(xhr.status);
+      //           console.log(xhr.responseText);
+      //         }
+      //       };
+
+      //       var data = `{
+      //   "username": "admin",
+      //   "password": "kelompok22"
+      // }`;
+
+      //       xhr.send(data);
+
       try {
-        const response = await this.$auth.loginWith("local", {data:{username: this.username, password: this.password} },);
+        const response = await this.$auth.loginWith(
+          "local",
+          { username: "admin", password: "kelompok22" },
+          {
+            headers: {
+              "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+              "Content-Type": "application/json",
+            },
+          }
+        );
         console.log(response);
         if (response.data.success) {
-          this.$router.replace({ name: "admin" });
+          this.$router.replace({ name: "user" });
         }
       } catch (err) {
         console.log(err);
       }
     },
   },
-};  
+};
 </script>
 
 <style scoped>

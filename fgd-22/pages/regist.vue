@@ -141,24 +141,38 @@ export default {
     password: "",
   }),
 
+  // httpHeaders: () => ({
+  //   "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+  //   "Content-Type": "application/json",
+  // }),
+
   methods: {
     async validate() {
       const response = await this.$axios
-        .$post("https://moot-rest-api.herokuapp.com/api/v1/register", {
-          username: this.username,
-          email: this.email,
-          name: this.name,
-          password: this.password,
-        })
+        .$post(
+          "/register",
+          {
+            username: this.username,
+            email: this.email,
+            name: this.name,
+            password: this.password,
+          },
+          {
+            headers: {
+              "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
-          alert("Register Success");
+          // alert("Register Success");
         })
         .catch((err) => {
           console.log(err);
-          alert("Register Failed")
+          // alert("Register Failed");
         });
-      console.log(response);
+      console.log(response, headers);
     },
   },
 };
