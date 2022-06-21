@@ -7,7 +7,7 @@
       app
     >
       <v-btn text disabled>
-        <img src="img/moot.png" height="50" />
+        <img src="img/logo.svg" height="50" />
       </v-btn>
       <v-spacer></v-spacer>
 
@@ -91,7 +91,7 @@
 
       <div class="ml-5 mr-5 mb-6 mt-6">
         <h4 style="color: #000">Category</h4>
-        <v-list v-for="list in kategori" :key="list">
+        <v-list v-for="list in kategori" :key="list.text">
           <v-btn
             :to="{ name: 'category', params: { category: list.text } }"
             width="225px"
@@ -121,9 +121,9 @@
           <span class="ml-4">Ranking</span>
         </v-btn>
       </v-hover>
-      <v-hover v-slot="{ hover }">
+      <v-hover>
         <v-dialog>
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ on, attrs,hover }">
             <v-btn
               width="225px"
               elevation="0"
