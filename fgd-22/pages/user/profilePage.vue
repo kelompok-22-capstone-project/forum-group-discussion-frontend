@@ -1,5 +1,5 @@
 <template>
-  <v-div>
+  <div>
     <v-row no-gutters>
       <v-col md="6">
         <v-card class="ma-8 pa-6 elevation-0">
@@ -30,11 +30,11 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-    <v-div>
+    <div>
       <h2 class="mt-mb-8 pa-6 grey--text">Your Thread</h2>
       <cards />
-    </v-div>
-  </v-div>
+    </div>
+  </div>
 </template>
 
 <script>

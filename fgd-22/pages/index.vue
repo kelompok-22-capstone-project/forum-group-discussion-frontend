@@ -1,5 +1,5 @@
 <template>
-<v-div>
+<div>
   <v-row justify="center" align="center">
     
     <CreateThread />
@@ -17,7 +17,7 @@
     </v-col>
 
   </v-row>
-</v-div>
+</div>
 </template>
 
 <script>
