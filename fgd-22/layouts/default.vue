@@ -7,7 +7,7 @@
       app
     >
       <v-btn text disabled>
-        <img src="img/moot.png" height="50" />
+        <img src="/img/logo.svg" height="50" />
       </v-btn>
       <v-spacer></v-spacer>
 
@@ -57,81 +57,60 @@
 
       <v-spacer></v-spacer>
 
-      <v-hover v-slot="{ hover }">
+      <v-hover>
         <v-btn
           width="225px"
           elevation="0"
           to="/"
-          class="justify-start rounded-lg no-uppercase"
-          :style="{
-            'background-color': hover ? '#1976D2' : '#fff',
-            color: hover ? '#fff' : '#1976D2',
-          }"
+          class="justify-start rounded-lg no-uppercase btn-hover"
         >
           <v-icon>mdi-home-outline</v-icon>
           <span class="ml-4">Home</span>
         </v-btn>
       </v-hover>
 
-      <v-hover v-slot="{ hover }">
+      <v-hover>
         <v-btn
           width="225px"
           to="user/thread"
           elevation="0"
-          class="justify-start rounded-lg no-uppercase"
-          :style="{
-            'background-color': hover ? '#1976D2' : '#fff',
-            color: hover ? '#fff' : '#1976D2',
-          }"
+          class="justify-start rounded-lg no-uppercase btn-hover"
         >
           <v-icon>mdi-file-document-outline</v-icon>
           <span class="ml-4">Your Thread</span>
         </v-btn>
       </v-hover>
-
       <div class="ml-5 mr-5 mb-6 mt-6">
         <h4 style="color: #000">Category</h4>
-        <v-list v-for="list in kategori" :key="list">
+        <v-list v-for="list in categoryList" :key="list.ID">
           <v-btn
-            :to="{ name: 'category', params: { category: list.text } }"
+            :to="{ name: 'category', params: { category: list.name } }"
             width="225px"
             elevation="0"
-            class="justify-start rounded-lg no-uppercase"
-            :style="{
-              'background-color': hover ? '#1976D2' : '#fff',
-              color: hover ? '#fff' : '#1976D2',
-            }"
+            class="justify-start rounded-lg no-uppercase btn-hover"
           >
-            {{ list.text }}
+            {{ list.name }}
           </v-btn>
         </v-list>
       </div>
 
-      <v-hover v-slot="{ hover }">
+      <v-hover>
         <v-btn
           width="225px"
           elevation="0"
-          class="justify-start rounded-lg no-uppercase mb-6"
-          :style="{
-            'background-color': hover ? '#1976D2' : '#fff',
-            color: hover ? '#fff' : '#1976D2',
-          }"
+          class="justify-start rounded-lg no-uppercase btn-hover mb-6"
         >
           <v-icon>mdi-crown-outline</v-icon>
           <span class="ml-4">Ranking</span>
         </v-btn>
       </v-hover>
-      <v-hover v-slot="{ hover }">
+      <v-hover>
         <v-dialog>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               width="225px"
               elevation="0"
-              class="justify-start rounded-lg no-uppercase"
-              :style="{
-                'background-color': hover ? '#fff' : '#1976D2',
-                color: hover ? '#1976D2' : '#fff',
-              }"
+              class="justify-start rounded-lg no-uppercase btn-hover"
               v-bind="attrs"
               v-on="on"
             >
@@ -200,7 +179,38 @@ export default {
     fixed: true,
     kategori: [{ text: "Makanan" }, { text: "Mikinin" }, { text: "Mukunun" }],
     cards: ["Today", "Yesterday"],
+    category: [],
   }),
+
+  computed: {
+    categoryList() {
+      return this.$store.state.general.getcategory.category;
+    },
+  },
+
+  mounted(){
+    this.$store.dispatch('general/getcategory/getCategoriesData')
+  },
+
+  //   created() {
+  //   const response = this.$axios
+  //     .$get("/categories", {
+  //       headers: {
+  //         "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //     .then((response) => {
+  //       this.category = response.data.categories;
+  //       console.log("data:");
+  //       console.log(response.data.categories);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       // alert("Register Failed");
+  //     });
+  //   console.log(response);
+  // },
 };
 </script>
 
@@ -208,9 +218,12 @@ export default {
 .no-uppercase {
   text-transform: unset !important;
 }
-.v-select__selection,
-.v-select__selection--comma,
-.v-select.v-text-field input {
-  color: blue !important;
+.btn-hover {
+  color: #1976d2 !important;
+  background-color: #fff !important ;
+}
+.btn-hover:hover {
+  color: #fff !important;
+  background-color: #1976d2 !important ;
 }
 </style>

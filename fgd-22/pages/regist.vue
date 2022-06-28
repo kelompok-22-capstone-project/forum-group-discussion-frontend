@@ -78,7 +78,7 @@
                             dark
                             block
                             elevation="5"
-                            @click="validate"
+                            @click.prevent="validate"
                             >Register</v-btn
                           >
                         </v-form>
@@ -166,13 +166,15 @@ export default {
         )
         .then((res) => {
           console.log(res);
+          this.$router.push('/login')
           // alert("Register Success");
         })
         .catch((err) => {
           console.log(err);
+          return false;
           // alert("Register Failed");
         });
-      console.log(response, headers);
+      console.log(response);
     },
   },
 };
