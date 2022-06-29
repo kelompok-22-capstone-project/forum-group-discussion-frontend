@@ -88,9 +88,9 @@ export default {
   name: "LoginPage",
   data: () => ({
     valid: true,
-    login:{
-    username: "",
-    password: "",
+    login: {
+      username: "",
+      password: "",
     },
     userRules: [(v) => !!v || "email can not be empty"],
     passRules: [
@@ -100,56 +100,20 @@ export default {
     checkbox: false,
   }),
 
-  // httpHeaders: () => ({
-  //   "Content-Type": "application/json",
-  //   "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
-  // }),
-
   methods: {
     async handleLoginClicked() {
-      // const user = {
-      //   username: this.username,
-      //   password: this.password,
-      // };
-
-      //       console.log(this.username);
-      //       console.log(this.password);
-
-      //       var url = "https://moot-rest-api.herokuapp.com/api/v1/login";
-
-      //       var xhr = new XMLHttpRequest();
-      //       xhr.open("POST", url);
-
-      //       xhr.setRequestHeader("accept", "application/json");
-      //       xhr.setRequestHeader(
-      //         "API-Key",
-      //         "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j"
-      //       );
-      //       xhr.setRequestHeader("Content-Type", "application/json");
-
-      //       xhr.onreadystatechange = function () {
-      //         if (xhr.readyState === 4) {
-      //           console.log(xhr.status);
-      //           console.log(xhr.responseText);
-      //         }
-      //       };
-
-      //       var data = `{
-      //   "username": "admin",
-      //   "password": "kelompok22"
-      // }`;
-
-      //       xhr.send(data);
-
-      try {
-        const response = await this.$auth.loginWith("local",{data: this.login});
-        console.log(response);
-        if (response.data.success) {
-          this.$router.replace({ name: "user" });
-        }
-      } catch (err) {
-        console.log(err, this.login);
-      }
+      const response = await this.$auth.loginWith("local", {
+          data: this.login,
+        })
+        .then((res) => {
+          (res.status);
+          this.$router.push('/')
+        })
+        .catch((err) => {
+          console.log(err);
+          return false;
+        });
+      (response);
     },
   },
 };
