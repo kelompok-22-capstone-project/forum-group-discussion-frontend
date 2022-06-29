@@ -26,6 +26,7 @@ export default {
 
   mounted() {
     this.$store.dispatch("general/getcategory/getCategoriesData");
+    return console.log('call success')
   },
 };
 </script>

@@ -29,7 +29,7 @@
                           color="blue"
                           autocomplete="false"
                           class="mt-16"
-                          v-model="username"
+                          v-model="login.username"
                         />
 
                         <v-text-field
@@ -40,7 +40,7 @@
                           color="blue"
                           autocomplete="false"
                           type="password"
-                          v-model="password"
+                          v-model="login.password"
                         />
 
                         <v-row>
@@ -88,9 +88,11 @@ export default {
   name: "LoginPage",
   data: () => ({
     valid: true,
+    login:{
     username: "",
-    userRules: [(v) => !!v || "email can not be empty"],
     password: "",
+    },
+    userRules: [(v) => !!v || "email can not be empty"],
     passRules: [
       (v) => !!v || "Password is require",
       (v) => (v && v.length >= 8) || "Name must be less than 10 characters",
@@ -140,22 +142,13 @@ export default {
       //       xhr.send(data);
 
       try {
-        const response = await this.$auth.loginWith(
-          "local",
-          { username: "admin", password: "kelompok22" },
-          {
-            headers: {
-              "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await this.$auth.loginWith("local",{data: this.login});
         console.log(response);
         if (response.data.success) {
           this.$router.replace({ name: "user" });
         }
       } catch (err) {
-        console.log(err);
+        console.log(err, this.login);
       }
     },
   },
