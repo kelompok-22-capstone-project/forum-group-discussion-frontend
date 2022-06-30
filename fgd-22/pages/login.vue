@@ -106,8 +106,13 @@ export default {
           data: this.login,
         })
         .then((res) => {
+          if(res.status === "success"){
           (res.status);
           this.$router.push('/')
+          }else{
+          (res.status);
+          this.$router.push('/admin/dashboard')
+          }
         })
         .catch((err) => {
           console.log(err);
