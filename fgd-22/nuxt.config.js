@@ -61,7 +61,7 @@ export default {
             propertyName: "data.token",
           },
           user: {
-            url: "/users/me",
+            url: "/users",
             method: "get",
             headers: {
               "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",

@@ -106,7 +106,8 @@ export default {
           data: this.login,
         })
         .then((res) => {
-          if(res.status === "success"){
+          console.log(res.data)
+          if(res.data.data.role === "user"){
           (res.status);
           this.$router.push('/')
           }else{
