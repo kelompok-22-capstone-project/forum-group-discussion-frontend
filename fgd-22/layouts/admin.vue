@@ -45,7 +45,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
-            to="dashboard"
+            :to="{name:'admin-dashboard'}"
             width="225px"
             class="justify-start no-uppercase ml-5 mb-3"
             :style="{
@@ -60,7 +60,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
-            to="category"
+            :to="{name:'admin-category'}"
             width="225px"
             class="justify-start no-uppercase ml-5 mb-3"
             :style="{
@@ -75,7 +75,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
-            to="report"
+            :to="{name:'admin-report'}"
             width="225px"
             class="justify-start no-uppercase ml-5"
             :style="{
@@ -90,7 +90,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
-            to="thread"
+            :to="{name:'admin-thread'}"
             width="225px"
             class="justify-start no-uppercase ml-5 mb-3"
             :style="{
