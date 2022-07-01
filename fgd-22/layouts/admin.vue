@@ -10,20 +10,17 @@
         <h1 style="color: #1976d2">Admin</h1>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-responsive max-width="500" class="mr-2">
-        <v-text-field
-          label="Search"
-          dense
-          flat
-          elevation="5"
-          hide-details
-          solo-inverted
-        >
-        </v-text-field>
-      </v-responsive>
-      <v-btn flat depressed color="light-grey">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      <v-text-field
+        dense
+        text
+        placeholder="Search"
+        hide-details
+        rounded
+        solo-inverted
+        class="rounded-lg"
+        append-icon="mdi-magnify"
+      >
+      </v-text-field>
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" :clipped="clipped" app class="mx-5">
@@ -48,6 +45,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
+            to="dashboard"
             width="225px"
             class="justify-start no-uppercase ml-5 mb-3"
             :style="{
@@ -55,13 +53,14 @@
               color: hover ? '#fff' : '#1976D2',
             }"
           >
-            <v-icon class="mr-3">mdi-home</v-icon>
+            <v-icon class="mr-3">mdi-home-outline</v-icon>
             <span>Dashboard</span>
           </v-btn>
         </v-hover>
         <v-hover v-slot="{ hover }">
           <v-btn
             text
+            to="category"
             width="225px"
             class="justify-start no-uppercase ml-5 mb-3"
             :style="{
@@ -69,27 +68,14 @@
               color: hover ? '#fff' : '#1976D2',
             }"
           >
-            <v-icon class="mr-3">mdi-account</v-icon>
-            <span>User</span>
-          </v-btn>
-        </v-hover>
-        <v-hover v-slot="{ hover }">
-          <v-btn
-            text
-            width="225px"
-            class="justify-start no-uppercase ml-5 mb-3"
-            :style="{
-              'background-color': hover ? '#1976D2' : '#fff',
-              color: hover ? '#fff' : '#1976D2',
-            }"
-          >
-            <v-icon class="mr-3">mdi-format-line-spacing</v-icon>
+            <v-icon class="mr-3">mdi-shape-outline</v-icon>
             <span>Category</span>
           </v-btn>
         </v-hover>
         <v-hover v-slot="{ hover }">
           <v-btn
             text
+            to="report"
             width="225px"
             class="justify-start no-uppercase ml-5"
             :style="{
@@ -97,8 +83,23 @@
               color: hover ? '#fff' : '#1976D2',
             }"
           >
-            <v-icon class="mr-3">mdi-alert-circle-outline</v-icon>
+            <v-icon class="mr-3">mdi-message-alert-outline</v-icon>
             <span>Report</span>
+          </v-btn>
+        </v-hover>
+        <v-hover v-slot="{ hover }">
+          <v-btn
+            text
+            to="thread"
+            width="225px"
+            class="justify-start no-uppercase ml-5 mb-3"
+            :style="{
+              'background-color': hover ? '#1976D2' : '#fff',
+              color: hover ? '#fff' : '#1976D2',
+            }"
+          >
+            <v-icon class="mr-3">mdi-file-document-outline</v-icon>
+            <span>Thread</span>
           </v-btn>
         </v-hover>
       </div>
@@ -109,6 +110,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
+            @click.prevent="logout"
             width="225px"
             class="justify-start no-uppercase ml-5"
             :style="{
@@ -141,6 +143,17 @@ export default {
     clipped: true,
     fixed: true,
   }),
+
+  methods:{
+    logout(){
+      document.cookie = 'auth._token.local' +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie = 'auth.strategy' +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      localStorage.removeItem('auth._token.local','auth._refresh_token.local','auth.strategy');
+      this.$router.push("/");
+      // this.$cookie.delete('auth._token.local');
+      // this.$cookie.delete('auth.strategy');
+    }
+  }
 };
 </script>
 

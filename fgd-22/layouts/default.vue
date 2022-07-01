@@ -13,7 +13,7 @@
 
       <v-text-field
         dense
-        flat
+        text
         placeholder="Search"
         hide-details
         rounded
@@ -191,26 +191,6 @@ export default {
   mounted(){
     this.$store.dispatch('general/getcategory/getCategoriesData')
   },
-
-  //   created() {
-  //   const response = this.$axios
-  //     .$get("/categories", {
-  //       headers: {
-  //         "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //     .then((response) => {
-  //       this.category = response.data.categories;
-  //       console.log("data:");
-  //       console.log(response.data.categories);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       // alert("Register Failed");
-  //     });
-  //   console.log(response);
-  // },
 };
 </script>
 
