@@ -22,7 +22,7 @@
             <v-col class="pl-6">
               <v-checkbox
                 v-model="selected"
-                :label="category.ID"
+                :label="category.name"
                 :value="category.ID"
               ></v-checkbox>
             </v-col>
