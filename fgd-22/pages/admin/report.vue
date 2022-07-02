@@ -1,7 +1,7 @@
 <template>
   <div class="ma-6">
     <v-card class="d-flex justify-space-between mb-16" flat tile>
-      <h2 style="color: lightgrey">List Thread</h2>
+      <h2 style="color: lightgrey">List Report</h2>
     </v-card>
     <div>
       <v-card flat>
@@ -103,25 +103,18 @@ export default {
     return {
       dialog: false,
       selected: null,
-      reports: [],
+      // reports: [],
     };
   },
 
-  async created() {
-    await this.$axios
-      .$get("/reports", {
-        headers: {
-          "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        this.reports = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  computed: {
+    reports() {
+      return this.$store.state.general.getreport.reports;
+    },
+  },
+
+  mounted() {
+    this.$store.dispatch("general/getreport/getReportData");
   },
 
   methods: {

@@ -105,25 +105,18 @@ export default {
   data() {
     return {
       dialog: false,
-      reports: [],
+      // reports: [],
     };
   },
 
-  async created() {
-    await this.$axios
-      .$get("/reports", {
-        headers: {
-          "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        this.reports = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  computed: {
+    reports() {
+      return this.$store.state.general.getreport.reports;
+    },
+  },
+
+  mounted() {
+    this.$store.dispatch("general/getreport/getReportData");
   },
 
   methods: {
