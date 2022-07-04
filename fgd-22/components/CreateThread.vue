@@ -18,9 +18,9 @@
       </template>
       <v-card>
         <v-col cols="12" sm="6" md="12">
-        <v-card-title>
-          <span class="text-h5">User Profile</span>
-        </v-card-title>
+          <v-card-title>
+            <span class="text-h5">User Profile</span>
+          </v-card-title>
         </v-col>
 
         <v-card-text>
@@ -39,14 +39,8 @@
                   outlined
                   name="input-7-4"
                   label="Description"
-                  
                 ></v-textarea>
               </v-col>
-
-              
-              
-              
-              
             </v-row>
           </v-container>
         </v-card-text>
@@ -66,8 +60,94 @@
 
 <script>
 export default {
-  data: () => ({
-    dialog: false,
-  }),
+  //layout
+  layout: "admin",
+
+  //meta
+  head() {
+    return {
+      title: "Add New Product - Administrator",
+    };
+  },
+
+  components: {
+    "ckeditor-nuxt": () => {
+      if (process.client) {
+        return import("@blowstack/ckeditor-nuxt");
+      }
+    },
+  },
+
+  data() {
+    return {
+      //state thread
+      thread: {
+        title: "string",
+        description: "string",
+        categoryID: "string",
+      },
+      //state validation
+      validation: [],
+      //config CKEDITOR
+      editorConfig: {
+        removePlugins: ["Title"],
+      },
+    };
+  },
+
+  //hook "asyncData"
+  async asyncData({ store }) {
+    //get list all categories
+    await store.dispatch("admin/category/getListAllCategories");
+  },
+
+  //computed
+  computed: {
+    //categories
+    categories() {
+      return this.$store.state.admin.category.categories;
+    },
+  },
+
+  methods: {
+    //handle file upload
+
+    //method "storeThread"
+    async storeProduct() {
+      //define formData
+      let formData = new FormData();
+
+      formData.append("title", this.thread.title);
+      formData.append("description", this.thread.description);
+      formData.append("categoryID", this.thread.categoryID);
+
+      //sending data to action "storeThread" vuex
+      await this.$store
+        .dispatch("web/threads/storeThread", formData)
+
+        //success
+        .then(() => {
+          //sweet alert
+          this.$swal.fire({
+            title: "BERHASIL!",
+            text: "Data Berhasil Disimpan!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+
+          //redirect route "admin-products"
+          // this.$router.push({
+          //   name: "admin-products",
+          // });
+        })
+
+        //error
+        .catch((error) => {
+          //assign error to state "validation"
+          this.validation = error.response.data;
+        });
+    },
+  },
 };
 </script>
