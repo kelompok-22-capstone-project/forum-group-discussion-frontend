@@ -1,6 +1,8 @@
 //state
 export const state = () => ({
-  category:[],
+  category: [],
+  totalCategory: [],
+  categoryName:[],
 });
 
 //mutations
@@ -10,11 +12,13 @@ export const mutations = {
     //set value state "category"
     state.category = payload;
   },
+  COUNT_CATEGORY_DATA(state, payload) {
+    state.totalCategory = payload;
+  },
 };
 
 //actions
 export const actions = {
-
   //get categories data
   async getCategoriesData({ commit }) {
     //set promise
@@ -27,16 +31,14 @@ export const actions = {
             "Content-Type": "application/json",
           },
         })
-        //success
         .then((response) => {
-          //commit ti mutation "SET_CATEGORIES_DATA"
           commit("SET_CATEGORY_DATA", response.data.data.categories);
-          console.log(response.data.data.categories);
+          commit("COUNT_CATEGORY_DATA", response.data.data.categories.length);
+          console.log("get categories success", response.data.data.categories.length, response.data.data.categories);
 
           //resolve promise
           resolve();
         });
     });
   },
-
 };

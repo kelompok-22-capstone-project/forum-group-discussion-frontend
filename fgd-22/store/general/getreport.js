@@ -1,6 +1,7 @@
 //state
 export const state = () => ({
     reports:[],
+    totalReport:0,
   });
   
   //mutations
@@ -9,6 +10,9 @@ export const state = () => ({
     SET_REPORT_DATA(state, payload) {
       //set value state "category"
       state.reports = payload;
+    },
+    COUNT_REPORT_DATA(state, payload){
+      state.totalReport = payload;
     },
   };
   
@@ -31,7 +35,8 @@ export const state = () => ({
           .then((response) => {
             //commit ti mutation "SET_CATEGORIES_DATA"
             commit("SET_REPORT_DATA", response.data.data.list);
-            console.log(response.data.data.list);
+            commit("COUNT_REPORT_DATA", response.data.data.list.length);
+            console.log("get report success", response.data.data.list.length);
   
             //resolve promise
             resolve();

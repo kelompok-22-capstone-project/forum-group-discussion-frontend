@@ -1,17 +1,19 @@
 //state
 export const state = () => ({
     threads:[],
+    totalThread:[],
   });
   
   //mutations
   export const mutations = {
     //mutation "SET_CATEGORY_DATA"
-    SET_CATEGORY_DATA(state, payload) {
-      //set value state "category"
+    SET_THREAD_DATA(state, payload) {
       state.threads = payload;
     },
-  };
-  
+    COUNT_THREAD_DATA(state,payload){
+      state.totalThread = payload;
+  },
+}
   //actions
   export const actions = {
   
@@ -30,8 +32,9 @@ export const state = () => ({
           //success
           .then((response) => {
             //commit ti mutation "SET_CATEGORIES_DATA"
-            commit("SET_CATEGORY_DATA", response.data.data.list);
-            console.log(response.data.data.list);
+            commit("SET_THREAD_DATA", response.data.data.list);
+            commit("COUNT_THREAD_DATA", response.data.data.list.length);
+            console.log("get thread success", response.data.data.length, response.data.data.list);
   
             //resolve promise
             resolve();

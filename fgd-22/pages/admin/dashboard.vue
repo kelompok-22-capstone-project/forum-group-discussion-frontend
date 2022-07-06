@@ -6,7 +6,7 @@
           <v-list-item three-line class="white--text">
             <v-list-item-content>
               <div class="mb-2">Total User</div>
-              <v-list-item-title class="text-h5 mb-1"> 190 </v-list-item-title>
+              <v-list-item-title class="text-h5 mb-1"> {{totalUser}} </v-list-item-title>
             </v-list-item-content>
 
             <v-list-item-avatar size="80">
@@ -20,11 +20,11 @@
           <v-list-item three-line class="white--text">
             <v-list-item-content>
               <div class="mb-2">Total Threads</div>
-              <v-list-item-title class="text-h5 mb-1"> 190 </v-list-item-title>
+              <v-list-item-title class="text-h5 mb-1"> {{totalThread}} </v-list-item-title>
             </v-list-item-content>
 
             <v-list-item-avatar size="80">
-              <v-icon size="74" color="#ffff">mdi-note-outline</v-icon>
+              <v-icon size="74" color="#ffff">mdi-file-document-outline</v-icon>
             </v-list-item-avatar>
           </v-list-item>
         </v-card>
@@ -35,12 +35,12 @@
         <v-card class="ma-8 pa-6 rounded-lg" color="error" link>
           <v-list-item three-line class="white--text">
             <v-list-item-content>
-              <div class="mb-2">Total Moderator</div>
-              <v-list-item-title class="text-h5 mb-1"> 190 </v-list-item-title>
+              <div class="mb-2">Total Category</div>
+              <v-list-item-title class="text-h5 mb-1"> {{totalCategory}} </v-list-item-title>
             </v-list-item-content>
 
             <v-list-item-avatar size="80">
-              <v-icon size="74" color="#ffff">mdi-account-edit</v-icon>
+              <v-icon size="74" color="#ffff">mdi-shape-outline</v-icon>
             </v-list-item-avatar>
           </v-list-item>
         </v-card>
@@ -50,11 +50,13 @@
           <v-list-item three-line class="white--text">
             <v-list-item-content>
               <div class="mb-2">Total Report</div>
-              <v-list-item-title class="text-h5 mb-1"> 190 </v-list-item-title>
+              <v-list-item-title class="text-h5 mb-1">{{
+                totalReport
+              }}</v-list-item-title>
             </v-list-item-content>
 
             <v-list-item-avatar size="80">
-              <v-icon size="74" color="#ffff">mdi-alert-circle-outline</v-icon>
+              <v-icon size="74" color="#ffff">mdi-message-alert-outline</v-icon>
             </v-list-item-avatar>
           </v-list-item>
         </v-card>
@@ -65,7 +67,32 @@
 
 <script>
 export default {
+  name: "dashboardPage",
   layout: "admin",
+  data() {
+    return {};
+  },
+  computed: {
+    totalReport() {
+      return this.$store.state.general.getreport.totalReport;
+    },
+    totalThread() {
+      return this.$store.state.general.getthread.totalThread;
+    },
+    totalUser() {
+      return this.$store.state.general.getuser.totalUser;
+    },
+    totalCategory() {
+      return this.$store.state.general.getcategory.totalCategory;
+    },
+  },
+
+  mounted() {
+    this.$store.dispatch("general/getreport/getReportData");
+    this.$store.dispatch("general/getthread/getThreadData");
+    this.$store.dispatch("general/getuser/getUserData");
+    this.$store.dispatch("general/getcategory/getCategoriesData");
+  },
 };
 </script>
 
