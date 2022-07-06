@@ -126,7 +126,7 @@ export default {
     ],
     passRules: [
       (v) => !!v || "**Require: 8 latters",
-      (v) => (v && v.length >= 8) || "Name must be less than 10 characters",
+      (v) => (v && v.length >= 8) || "Name must be less than 8 characters",
     ],
     email: "",
     emailRules: [

@@ -95,7 +95,7 @@ export default {
     userRules: [(v) => !!v || "email can not be empty"],
     passRules: [
       (v) => !!v || "Password is require",
-      (v) => (v && v.length >= 8) || "Name must be less than 10 characters",
+      (v) => (v && v.length >= 8) || "Name must be less than 8 characters",
     ],
     checkbox: false,
   }),
@@ -117,6 +117,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          alert('login failed')
           return false;
         });
       (response);
