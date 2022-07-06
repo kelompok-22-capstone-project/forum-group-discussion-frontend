@@ -93,7 +93,7 @@
                           have an moot account?
                         </h5>
 
-                        <router-link to="/">
+                        <router-link to="/login">
                           <v-btn color="error" dark block>LOGIN</v-btn>
                         </router-link>
                       </v-col>
