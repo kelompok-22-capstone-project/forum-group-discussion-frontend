@@ -2,7 +2,8 @@
 export const state = () => ({
     users:[],
     totalUser:[],
-    myData:[],
+    myUsername:[],
+    myEmail:[],
   });
   
   //mutations
@@ -13,8 +14,11 @@ export const state = () => ({
     COUNT_USER_DATA(state,payload){
       state.totalUser = payload;
     },
-    SET_MY_DATA(state, payload) {
-      state.myData = payload;
+    SET_MY_DATA_NAME(state, payload) {
+      state.myUsername = payload;
+    },
+    SET_MY_DATA_EMAIL(state, payload) {
+      state.myEmail = payload;
     },
   };
   
@@ -54,8 +58,9 @@ export const state = () => ({
           })
           //success
           .then((response) => {
-            commit("SET_MY_DATA", response.data.data);
-            console.log("get user success",response.data.data);
+            commit("SET_MY_DATA_NAME", response.data.data.username);
+            commit("SET_MY_DATA_EMAIL", response.data.data.email);
+            console.log("get my data success",response.data.data);
   
             //resolve promise
             resolve();

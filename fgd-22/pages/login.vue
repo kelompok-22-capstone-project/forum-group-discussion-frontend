@@ -102,25 +102,30 @@ export default {
 
   methods: {
     async handleLoginClicked() {
-      const response = await this.$auth.loginWith("local", {
+      const response = await this.$auth
+        .loginWith("local", {
           data: this.login,
         })
         .then((res) => {
-          console.log(res.data)
-          if(res.data.data.role === "user"){
-          (res.status);
-          this.$router.push('/')
-          }else{
-          (res.status);
-          this.$router.push('/admin/dashboard')
+          console.log(res.data);
+          if (res.data.data.role === "user") {
+            res.status;
+            let role = res.data.data.role;
+            this.$store.commit("login/SET_USER_ROLE", role);
+            this.$router.push("/");
+          } else {
+            res.status;
+            let role = res.data.data.role;
+            this.$store.commit("login/SET_USER_ROLE", role);
+            this.$router.push("/admin/dashboard");
           }
         })
         .catch((err) => {
           console.log(err);
-          alert('login failed')
+          alert("login failed");
           return false;
         });
-      (response);
+      response;
     },
   },
 };
