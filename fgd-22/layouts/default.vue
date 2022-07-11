@@ -53,10 +53,14 @@
           </v-list-item-avatar>
           <div v-if="role === 'user'">
             <v-list-item-content>
-              <v-list-item-title class="font-weight-medium">{{
-                myUsername
-              }}</v-list-item-title>
-              <v-list-item-subtitle>{{ myEmail }}</v-list-item-subtitle>
+              <v-card flat class="overflow-auto" width="150" link>
+                <v-list-item-title class="font-weight-medium">{{
+                  myUsername
+                }}</v-list-item-title>
+                <v-list-item-subtitle class="text-caption">{{
+                  myEmail
+                }}</v-list-item-subtitle>
+              </v-card>
             </v-list-item-content>
           </div>
           <div v-else>
@@ -246,7 +250,7 @@ export default {
       localStorage.removeItem("auth._token.local");
       localStorage.removeItem("auth._refresh_token.local");
       localStorage.removeItem("auth.strategy");
-      this.role = null
+      this.role = null;
       this.$router.push("/");
     },
   },
@@ -269,10 +273,10 @@ export default {
   mounted() {
     this.$store.dispatch("general/getcategory/getCategoriesData");
     this.$store.dispatch("general/getuser/getMyData");
-    if (localStorage.role === 'user') {
+    if (localStorage.role === "user") {
       this.role = localStorage.getItem("role");
-      } else {
-        console.log("role already set");
+    } else {
+      console.log("role already set");
     }
   },
 };
