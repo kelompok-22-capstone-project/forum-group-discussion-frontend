@@ -208,7 +208,7 @@
     <v-card flat class="ma-6">
       <h2 style="color: lightgrey">Comment</h2>
       <v-textarea
-        v-if="role === 'user'"
+        v-if="myRole === 'user'"
         solo
         v-on:keyup.enter="submitComment"
         v-model="comment"
@@ -409,7 +409,7 @@ export default {
     userList() {
       return this.$store.state.general.getuser.users;
     },
-        role() {
+    myRole() {
       return localStorage.getItem("role");
     },
   },
