@@ -34,7 +34,7 @@
                             v-model="email"
                           />
                           <v-text-field
-                            label="Display Name"
+                            label="Name"
                             outlined
                             dense
                             placeholder="e.g Calry Nimbu"
@@ -171,6 +171,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          alert("Register Failed, Try again")
           return false;
           // alert("Register Failed");
         });

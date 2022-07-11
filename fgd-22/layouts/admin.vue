@@ -31,10 +31,10 @@
 
         <v-list-item-content>
           <v-list-item-title class="font-weight-medium" style="color: #131f4b"
-            >admin 1</v-list-item-title
+            >admin</v-list-item-title
           >
           <v-list-item-subtitle style="color: #678ef0"
-            >@admin1</v-list-item-subtitle
+            >@admin</v-list-item-subtitle
           >
         </v-list-item-content>
       </v-list-item>
@@ -45,7 +45,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
-            :to="{name:'admin-dashboard'}"
+            :to="{ name: 'admin-dashboard' }"
             width="225px"
             class="justify-start no-uppercase ml-5 mb-3"
             :style="{
@@ -60,7 +60,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
-            :to="{name:'admin-category'}"
+            :to="{ name: 'admin-category' }"
             width="225px"
             class="justify-start no-uppercase ml-5 mb-3"
             :style="{
@@ -75,7 +75,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
-            :to="{name:'admin-report'}"
+            :to="{ name: 'admin-report' }"
             width="225px"
             class="justify-start no-uppercase ml-5"
             :style="{
@@ -90,7 +90,7 @@
         <v-hover v-slot="{ hover }">
           <v-btn
             text
-            :to="{name:'admin-thread'}"
+            :to="{ name: 'admin-thread' }"
             width="225px"
             class="justify-start no-uppercase ml-5 mb-3"
             :style="{
@@ -144,16 +144,21 @@ export default {
     fixed: true,
   }),
 
-  methods:{
-    logout(){
-      document.cookie = 'auth._token.local' +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-      document.cookie = 'auth.strategy' +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-      localStorage.removeItem('auth._token.local','auth._refresh_token.local','auth.strategy');
+  methods: {
+    logout() {
+      document.cookie =
+        "auth._token.local" +
+        "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      document.cookie =
+        "auth.strategy" + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      localStorage.removeItem("role");
+      localStorage.removeItem("auth._token.local");
+      localStorage.removeItem("auth._refresh_token.local");
+      localStorage.removeItem("auth.strategy");
+
       this.$router.push("/");
-      // this.$cookie.delete('auth._token.local');
-      // this.$cookie.delete('auth.strategy');
-    }
-  }
+    },
+  },
 };
 </script>
 

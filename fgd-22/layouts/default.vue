@@ -31,7 +31,7 @@
           depressed
           color="error"
           class="rounded-lg"
-          @click.prevent="logout"
+          @click="logout"
           >Logout</v-btn
         >
       </div>
@@ -87,7 +87,7 @@
       <v-hover>
         <v-btn
           width="225px"
-          to="user/thread"
+          :to="{ name: 'yourthread' }"
           elevation="0"
           class="justify-start rounded-lg no-uppercase btn-hover"
         >
@@ -198,12 +198,12 @@
 export default {
   name: "DefaultLayout",
   data: () => ({
-    loading: false,
     selection: 1,
     drawer: true,
     dialog: false,
     clipped: true,
     fixed: true,
+    role: null,
     title: "",
     description: "",
     categoryID: "",
@@ -242,13 +242,11 @@ export default {
         "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
       document.cookie =
         "auth.strategy" + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      localStorage.removeItem(
-        "auth._token.local",
-        "auth._refresh_token.local",
-        "auth.strategy"
-      );
-      let role = "";
-      this.$store.commit("login/SET_USER_ROLE", role);
+      localStorage.removeItem("role");
+      localStorage.removeItem("auth._token.local");
+      localStorage.removeItem("auth._refresh_token.local");
+      localStorage.removeItem("auth.strategy");
+      this.role = null
       this.$router.push("/");
     },
   },
@@ -257,8 +255,8 @@ export default {
     categoryList() {
       return this.$store.state.general.getcategory.category;
     },
-    role(){
-      return this.$store.state.login.role;
+    role() {
+      return localStorage.getItem("role");
     },
     myUsername() {
       return this.$store.state.general.getuser.myUsername;
@@ -271,6 +269,11 @@ export default {
   mounted() {
     this.$store.dispatch("general/getcategory/getCategoriesData");
     this.$store.dispatch("general/getuser/getMyData");
+    if (localStorage.role === 'user') {
+      this.role = localStorage.getItem("role");
+      } else {
+        console.log("role already set");
+    }
   },
 };
 </script>

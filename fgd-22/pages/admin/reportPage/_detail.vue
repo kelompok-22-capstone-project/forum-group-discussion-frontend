@@ -7,50 +7,50 @@
       <div v-if="report.ID === $route.params.report">
         <v-row align="center">
           <v-col cols="3">
-            <h4>User :</h4>
+            <p class="font-weight-medium">User :</p>
           </v-col>
           <v-col cols="3">
-            <h4>{{ report.username }}</h4>
-          </v-col>
+            <p>{{ report.username }}</p>
+          </v-col >
         </v-row>
         <v-row align="center">
           <v-col cols="3">
-            <h4>Report reason :</h4>
+            <p class="font-weight-medium">Report reason :</p>
           </v-col>
-          <v-col>
+          <v-col cols="3">
             <p>{{ report.reason }}</p>
           </v-col>
         </v-row>
         <v-row align="center">
           <v-col cols="3">
-            <h4>Report by :</h4>
+            <p class="font-weight-medium">Report by :</p>
           </v-col>
-          <v-col>
-            <h4>{{ report.moderatorUsername }}</h4>
+          <v-col cols="3">
+            <p>{{ report.moderatorUsername }}</p>
           </v-col>
         </v-row>
         <v-row align="center">
           <v-col cols="3">
-            <h4>From Thread (Title Thread) :</h4>
+            <p class="font-weight-medium">From Thread (Title Thread) :</p>
           </v-col>
-          <v-col>
+          <v-col cols="3">
             <p>{{ report.threadTitle }}</p>
           </v-col>
         </v-row>
         <v-row align="center">
           <v-col cols="3">
-            <h4>Comment :</h4>
+            <p class="font-weight-medium">Comment :</p>
           </v-col>
-          <v-col>
-            <p>{{ report.publishedOn }}</p>
+          <v-col cols="3">
+            <p>{{ report.comment }}</p>
           </v-col>
         </v-row>
         <v-row align="center">
           <v-col cols="3">
-            <h4>Date Comment :</h4>
+            <p class="font-weight-medium">Date Comment :</p>
           </v-col>
-          <v-col>
-            <p>{{ report.publishedOn }}</p>
+          <v-col cols="3">
+            <p>{{ report.commentPublishedOn }}</p>
           </v-col>
         </v-row>
       </div>
@@ -64,7 +64,7 @@
             dark
             @click.stop="dialog = true"
           >
-            Delete Thread
+            Ban User
           </v-btn>
 
           <v-dialog v-model="dialog" max-width="465">

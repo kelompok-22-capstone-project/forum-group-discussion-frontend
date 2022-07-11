@@ -111,12 +111,14 @@ export default {
           if (res.data.data.role === "user") {
             res.status;
             let role = res.data.data.role;
-            this.$store.commit("login/SET_USER_ROLE", role);
+            // this.$store.commit("login/SET_USER_ROLE", role);
+            localStorage.setItem("role", role);
             this.$router.push("/");
           } else {
             res.status;
             let role = res.data.data.role;
-            this.$store.commit("login/SET_USER_ROLE", role);
+            // this.$store.commit("login/SET_USER_ROLE", role);
+            localStorage.setItem("role", role);
             this.$router.push("/admin/dashboard");
           }
         })
