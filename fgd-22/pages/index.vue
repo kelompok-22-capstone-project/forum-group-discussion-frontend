@@ -1,15 +1,18 @@
 <template>
   <v-app>
     <div app>
-      <v-row justify="center">
+      <v-card
+        class="mx-auto mr-8 ml-8 mt-6 pa-0 rounded-lg"
+        elevation="5"
+        block
+      >
         <v-dialog v-model="dialog" max-width="1000px">
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ on, attrs }" class="d-block">
             <v-btn
-              width="1100px"
               height="60px"
-              class="mx-auto mr-8 ml-8 mt-6 rounded-lg"
-              color="#fff"
-              elevation="5"
+              block
+              class="mx-auto"
+              text
               v-bind="attrs"
               v-on="on"
             >
@@ -27,6 +30,9 @@
                   </v-col>
                   <v-col md="3">
                     <select class="select" v-model="categoryID">
+                      <option value="" selected disabled hidden>
+                        Category
+                      </option>
                       <option
                         v-for="list in categoryList"
                         :key="list.ID"
@@ -68,7 +74,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-      </v-row>
+      </v-card>
     </div>
     <div v-for="thread in threads" :key="thread.ID">
       <v-card
@@ -97,7 +103,16 @@
                 {{ thread.creatorUsername }}
               </v-btn>
             </v-list-item-content>
-            <v-btn small rounded outlined color="indigo" :to="{ name: 'category', params: { category: thread.categoryName } }">
+            <v-btn
+              small
+              rounded
+              outlined
+              color="indigo"
+              :to="{
+                name: 'category',
+                params: { category: thread.categoryName },
+              }"
+            >
               {{ thread.categoryName }}
             </v-btn>
           </v-list-item>
@@ -160,7 +175,7 @@ export default {
       categoryID: "",
       title: "",
       description: "",
-      threads:[],
+      threads: [],
       dialog: false,
     };
   },
@@ -168,12 +183,15 @@ export default {
     categoryList() {
       return this.$store.state.general.getcategory.category;
     },
+    myRole() {
+      return localStorage.getItem("role");
+    },
   },
 
   mounted() {
     this.$store.dispatch("general/getcategory/getCategoriesData");
   },
-  
+
   async created() {
     await this.$axios
       .$get(`/guest/threads`, {

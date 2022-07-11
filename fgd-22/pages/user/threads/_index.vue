@@ -358,7 +358,7 @@ export default {
       reportReason: "",
       removeTagDialogs: {},
       dialog: false,
-      role:'',
+      role: "",
       moderatorAccess: "",
       thread: [],
       firstModerator: "",
@@ -418,7 +418,7 @@ export default {
     this.$store.dispatch("general/getuser/getUserData");
   },
 
-    methods: {
+  methods: {
     async submitComment() {
       const response = await this.$axios
         .$post(
@@ -434,7 +434,21 @@ export default {
         .then((res) => {
           console.log(res);
           alert("Comment Success");
-          location.reload();
+          this.comment='';
+          this.$axios
+            .$get(`/guest/threads/${this.$route.params.index}/comments`, {
+              headers: {
+                "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res.data.list);
+              this.comments = res.data.list;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);

@@ -91,7 +91,7 @@
       <v-hover>
         <v-btn
           width="225px"
-          :to="{ name: 'yourthread' }"
+          :to="{ name: 'user-yourthread' }"
           elevation="0"
           class="justify-start rounded-lg no-uppercase btn-hover"
         >
@@ -147,6 +147,9 @@
                   </v-col>
                   <v-col md="3">
                     <select class="select" v-model="categoryID">
+                      <option value="" selected disabled hidden>
+                        Category
+                      </option>
                       <option
                         v-for="list in categoryList"
                         :key="list.ID"
