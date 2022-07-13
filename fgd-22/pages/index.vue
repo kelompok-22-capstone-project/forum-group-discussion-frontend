@@ -99,7 +99,8 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-btn plain text class="justify-start pa-1 no-uppercase">
+              <v-btn plain text class="justify-start pa-1 no-uppercase"
+              :to="{ name: 'user-profile', params: { index: thread.creatorUsername } }">
                 {{ thread.creatorUsername }}
               </v-btn>
             </v-list-item-content>
