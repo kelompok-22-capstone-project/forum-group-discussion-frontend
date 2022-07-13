@@ -1,7 +1,7 @@
 <template>
   <div class="ma-6">
     <v-card class="d-flex justify-space-between mb-16" flat tile>
-      <h2 style="color: lightgrey">List Category</h2>
+      <h2 style="color: grey">List Category</h2>
       <v-btn color="primary rounded-lg" to="/admin/createCategory">
         Create Category
       </v-btn>
@@ -9,25 +9,46 @@
     <div>
       <v-card flat>
         <v-row class="pl-4 pb-3">
-          <v-col>
+          <v-col cols="5">
             <h5>Categories</h5>
           </v-col>
-          <v-col>
+          <v-col cols="5">
             <h5>Description</h5>
           </v-col>
+          <v-col cols="2"></v-col>
         </v-row>
         <v-divider></v-divider>
         <div v-for="category in categoryList" :key="category.ID">
           <v-row>
-            <v-col class="pl-6">
-              <v-checkbox
-                v-model="selected"
-                :label="category.name"
-                :value="category.ID"
-              ></v-checkbox>
+            <v-col cols="5" class="pl-7 pt-7">
+              <span>{{ category.name }}</span>
             </v-col>
-            <v-col class="pl-4 pt-8">
-              <p>{{ category.description }}</p>
+            <v-col cols="5" class="pl-4 pt-7">
+              <span>{{ category.description }}</span>
+            </v-col>
+            <v-col cols="1" class="pt-5">
+              <v-btn
+                text
+                tile
+                :to="{
+                  name: 'admin-editCategory-editCategory',
+                  params: { editCategory: category.ID },
+                }"
+              >
+                <v-icon>mdi-pencil-outline</v-icon>
+              </v-btn>
+            </v-col>
+            <v-col cols="1">
+              <v-btn-toggle v-model="selected" tile group>
+                <v-btn
+                  text
+                  color="error"
+                  :value="category.ID"
+                  @click.stop="dialog = true"
+                >
+                  <v-icon color="error">mdi-delete-outline</v-icon>
+                </v-btn>
+              </v-btn-toggle>
             </v-col>
           </v-row>
           <v-divider></v-divider>
@@ -36,10 +57,6 @@
       <div class="mt-10">
         <template>
           <v-row justify="start">
-            <v-btn color="error" dark @click.stop="dialog = true">
-              Delete
-            </v-btn>
-
             <v-dialog v-model="dialog" max-width="465">
               <v-card class="pa-3">
                 <v-card-title class="text-h6">
@@ -48,12 +65,9 @@
                     <span style="color: #ff5252"> delete </span> this category ?
                   </p>
                 </v-card-title>
-
                 <v-card-actions>
                   <v-spacer></v-spacer>
-
                   <v-btn text @click="dialog = false"> Cancel </v-btn>
-
                   <v-btn
                     color="error"
                     class="rounded-lg"
@@ -98,7 +112,7 @@ export default {
         .then((res) => {
           console.log(res);
           alert("Delete Category Success");
-          location.reload();
+          this.$store.dispatch("general/getcategory/getCategoriesData");
         })
         .catch((err) => {
           console.log(err);

@@ -20,6 +20,8 @@
         solo-inverted
         class="rounded-lg"
         append-icon="mdi-magnify"
+        v-model="search"
+        v-on:keyup.enter="searchThread"
       >
       </v-text-field>
       <v-spacer></v-spacer>
@@ -88,17 +90,6 @@
         </v-btn>
       </v-hover>
 
-      <v-hover>
-        <v-btn
-          width="225px"
-          :to="{ name: 'user-yourthread' }"
-          elevation="0"
-          class="justify-start rounded-lg no-uppercase btn-hover"
-        >
-          <v-icon>mdi-file-document-outline</v-icon>
-          <span class="ml-4">Your Thread</span>
-        </v-btn>
-      </v-hover>
       <div class="ml-5 mr-5 mb-6 mt-6">
         <h4 style="color: #000">Category</h4>
         <v-list v-for="list in categoryList" :key="list.ID">
@@ -211,12 +202,17 @@ export default {
     clipped: true,
     fixed: true,
     role: null,
+    search: "",
     title: "",
     description: "",
     categoryID: "",
   }),
 
   methods: {
+    async searchThread() {
+      this.$store.commit("general/search/threads", this.search);
+      this.$router.push("/searchFound");
+    },
     async submit() {
       const response = await this.$axios
         .$post(

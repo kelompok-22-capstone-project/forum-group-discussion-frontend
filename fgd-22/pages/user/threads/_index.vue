@@ -1,7 +1,7 @@
 <template>
   <div class="ma-6">
     <v-card class="d-flex justify-space-between mb-5" flat tile>
-      <h2 style="color: lightgrey">Thread</h2>
+      <h2 style="color: grey">Thread</h2>
     </v-card>
     <v-card flat>
       <v-card-actions>
@@ -206,7 +206,7 @@
       </v-row>
     </v-card>
     <v-card flat class="ma-6">
-      <h2 style="color: lightgrey">Comment</h2>
+      <h2 style="color: grey">Comment</h2>
       <v-textarea
         v-if="myRole === 'user'"
         solo
@@ -434,7 +434,7 @@ export default {
         .then((res) => {
           console.log(res);
           alert("Comment Success");
-          this.comment='';
+          this.comment = "";
           this.$axios
             .$get(`/guest/threads/${this.$route.params.index}/comments`, {
               headers: {
@@ -492,7 +492,21 @@ export default {
         .then((res) => {
           console.log(res);
           alert("Remove Access Success");
-          location.reload();
+          this.$axios
+            .$get(`/guest/threads/${this.$route.params.index}`, {
+              headers: {
+                "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+              this.thread = res.data;
+              this.firstModerator = res.data.moderators[0].email;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -517,7 +531,21 @@ export default {
         .then((res) => {
           console.log(res);
           alert("Add Access Success");
-          location.reload();
+          this.$axios
+            .$get(`/guest/threads/${this.$route.params.index}`, {
+              headers: {
+                "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+              this.thread = res.data;
+              this.firstModerator = res.data.moderators[0].email;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -544,7 +572,21 @@ export default {
         .then((res) => {
           console.log(res);
           alert("Report Success");
-          location.reload();
+          this.$axios
+            .$get(`/guest/threads/${this.$route.params.index}`, {
+              headers: {
+                "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+              this.thread = res.data;
+              this.firstModerator = res.data.moderators[0].email;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -564,7 +606,21 @@ export default {
         )
         .then((res) => {
           console.log(res);
-          location.reload();
+          this.$axios
+            .$get(`/guest/threads/${this.$route.params.index}`, {
+              headers: {
+                "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+              this.thread = res.data;
+              this.firstModerator = res.data.moderators[0].email;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -584,7 +640,21 @@ export default {
         )
         .then((res) => {
           console.log(res);
-          location.reload();
+          this.$axios
+            .$get(`/guest/threads/${this.$route.params.index}`, {
+              headers: {
+                "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+              this.thread = res.data;
+              this.firstModerator = res.data.moderators[0].email;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);

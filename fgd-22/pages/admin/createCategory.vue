@@ -9,6 +9,7 @@
           <v-textarea
             class="rounded-lg"
             solo
+            required
             no-resize
             v-model="name"
             background-color="grey lighten-2"
@@ -20,6 +21,7 @@
           <v-textarea
             class="rounded-lg"
             solo
+            required
             v-model="description"
             background-color="grey lighten-2"
             label="Description"

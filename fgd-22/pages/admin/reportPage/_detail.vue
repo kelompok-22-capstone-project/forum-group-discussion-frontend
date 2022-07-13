@@ -1,7 +1,7 @@
 <template>
   <div class="ma-8">
     <v-card class="d-flex justify-space-between mb-16" flat tile>
-      <h2 style="color: lightgrey">Detail User</h2>
+      <h2 style="color: grey">Detail User</h2>
     </v-card>
     <div v-for="report in reports" :key="report.ID">
       <div v-if="report.ID === $route.params.report">

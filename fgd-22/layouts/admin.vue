@@ -9,19 +9,6 @@
       <v-btn text disabled class="no-uppercase">
         <h1 style="color: #1976d2">Admin</h1>
       </v-btn>
-      <v-spacer></v-spacer>
-      <v-text-field
-        dense
-        text
-        placeholder="Search"
-        hide-details
-        rounded
-        solo-inverted
-        class="rounded-lg"
-        append-icon="mdi-magnify"
-      >
-      </v-text-field>
-      <v-spacer></v-spacer>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" :clipped="clipped" app class="mx-5">
       <v-list-item two-line class="mb-10 mt-5 ml-2 mr-2">

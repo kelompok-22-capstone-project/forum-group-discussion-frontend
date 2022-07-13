@@ -1,7 +1,7 @@
 <template>
   <div class="ma-8">
     <v-card class="d-flex justify-space-between mb-16" flat tile>
-      <h2 style="color: lightgrey">Detail Thread</h2>
+      <h2 style="color: grey">Detail Thread</h2>
     </v-card>
     <v-row align="center">
       <v-col cols="3">

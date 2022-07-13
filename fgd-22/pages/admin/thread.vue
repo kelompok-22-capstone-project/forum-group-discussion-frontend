@@ -1,49 +1,61 @@
 <template>
   <div class="ma-6">
     <v-card class="d-flex justify-space-between mb-16" flat tile>
-      <h2 style="color: lightgrey">List Thread</h2>
+      <h2 style="color: grey">List Thread</h2>
     </v-card>
     <div>
       <v-card flat>
         <v-row class="pl-4 pb-3">
-          <v-col>
+          <v-col cols="3">
             <h5>Creator</h5>
           </v-col>
-          <v-col>
+          <v-col cols="3">
             <h5>Title</h5>
           </v-col>
-          <v-col>
+          <v-col cols="2">
             <h5>Category</h5>
           </v-col>
-          <v-col>
+          <v-col cols="2">
             <h5>Date</h5>
           </v-col>
+          <v-col cols="2"></v-col>
         </v-row>
         <v-divider></v-divider>
         <div v-for="thread in threadList" :key="thread.ID" link>
-          <v-row>
-            <v-col class="pl-6">
-              <v-checkbox
-                v-model="selected"
-                :label="thread.creatorUsername"
-                :value="thread.ID"
-              ></v-checkbox>
+          <v-row align="center">
+            <v-col cols="3" class="pl-7 pt-4">
+              <span>{{ thread.creatorUsername }}</span>
             </v-col>
-            <v-col class="pl-4 pt-8">
+            <v-col cols="3" class="pl-4">
               <v-btn
                 text
-                plain
+                color="black"
                 class="no-uppercase pa-0 justify-start"
-                :to="{name:'admin-threadPage-detail',params: { detail: thread.ID } }"
+                :to="{
+                  name: 'admin-threadPage-detail',
+                  params: { detail: thread.ID },
+                }"
               >
                 {{ thread.title }}
               </v-btn>
             </v-col>
-            <v-col class="pl-4 pt-8">
-              <p>{{ thread.categoryName }}</p>
+            <v-col cols="2" class="pl-4 pt-4">
+              <span>{{ thread.categoryName }}</span>
             </v-col>
-            <v-col class="pl-4 pt-8">
-              <p>{{ thread.publishedOn }}</p>
+            <v-col cols="2" class="pl-4 pt-4">
+              <span>{{ thread.publishedOn }}</span>
+            </v-col>
+            <v-col cols="2" class="pl-4 pt-4">
+                <v-btn-toggle v-model="selected" tile group>
+                  <v-btn
+                    text
+                    color="error"
+                    :value="thread.ID"
+                    @click.stop="dialog = true"
+                  >
+                    <v-icon color="error">mdi-delete-outline</v-icon>
+                  </v-btn>
+                </v-btn-toggle>
             </v-col>
           </v-row>
           <v-divider></v-divider>
@@ -52,17 +64,13 @@
       <div class="mt-10">
         <template>
           <v-row justify="start">
-            <v-btn color="error" dark @click.stop="dialog = true">
-              Delete Thread
-            </v-btn>
-
             <v-dialog v-model="dialog" max-width="465">
               <v-card class="pa-3">
                 <v-card-title class="text-h6">
-                  <p>
+                  <span>
                     Are you sure want to
                     <span style="color: #ff5252"> delete </span> this thread ?
-                  </p>
+                  </span>
                 </v-card-title>
 
                 <v-card-actions>
@@ -96,7 +104,8 @@ export default {
     return {
       dialog: false,
       selected: null,
-      paramsID:'',
+      paramsID: "",
+      selected: "",
     };
   },
 
@@ -120,7 +129,6 @@ export default {
         });
       console.log(response);
     },
-
   },
 
   computed: {

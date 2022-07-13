@@ -1,38 +1,34 @@
 <template>
   <div class="ma-6">
     <v-card class="d-flex justify-space-between mb-16" flat tile>
-      <h2 style="color: lightgrey">List Report</h2>
+      <h2 style="color: grey">List Report</h2>
     </v-card>
     <div>
       <v-card flat>
         <v-row class="pl-4 pb-3">
           <v-col>
-            <h5>Username</h5>
+            <h5 cols="2">Username</h5>
           </v-col>
-          <v-col>
+          <v-col cols="3">
             <h5>Report Reason</h5>
           </v-col>
-          <v-col>
+          <v-col cols="2">
             <h5>Report by (Moderator)</h5>
           </v-col>
-          <v-col>
+          <v-col cols="3">
             <h5>From (Title Thread)</h5>
           </v-col>
+          <v-col cols="2"></v-col>
         </v-row>
         <v-divider></v-divider>
         <div v-for="report in reports" :key="report.ID" link>
-          <v-row>
-            <v-col class="pl-6">
-              <v-checkbox
-                v-model="selected"
-                :label="report.username"
-                :value="report.ID"
-              ></v-checkbox>
+          <v-row align="center">
+            <v-col cols="2" class="pl-7 pt-5">
+              <p>{{ report.username }}</p>
             </v-col>
-            <v-col class="pl-4 pt-8">
+            <v-col cols="3" class="pl-7">
               <v-btn
                 text
-                plain
                 class="no-uppercase pa-0 justify-start"
                 :to="{
                   name: 'admin-reportPage-detail',
@@ -42,11 +38,23 @@
                 {{ report.reason }}
               </v-btn>
             </v-col>
-            <v-col class="pl-4 pt-8">
+            <v-col cols="2" class="pl-6 pt-5">
               <p>{{ report.moderatorUsername }}</p>
             </v-col>
-            <v-col class="pl-4 pt-8">
+            <v-col cols="3" class="pl-5 pt-5">
               <p>{{ report.threadTitle }}</p>
+            </v-col>
+            <v-col cols="2" >
+              <v-btn-toggle v-model="selected" tile group>
+                <v-btn
+                  text
+                  color="error"
+                  :value="report.ID"
+                  @click.stop="dialog = true"
+                >
+                  <v-icon color="error">mdi-delete-outline</v-icon>
+                </v-btn>
+              </v-btn-toggle>
             </v-col>
           </v-row>
           <v-divider></v-divider>
@@ -55,14 +63,6 @@
       <div class="mt-10">
         <template>
           <v-row justify="start">
-            <v-btn
-              color="error"
-              class="no-uppercase"
-              @click.stop="dialog = true"
-            >
-              Ban User
-            </v-btn>
-
             <v-dialog v-model="dialog" max-width="465">
               <v-card class="pa-3">
                 <v-card-title class="text-h6">
