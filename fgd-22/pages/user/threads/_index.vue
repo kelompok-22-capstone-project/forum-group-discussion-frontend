@@ -1,5 +1,3 @@
-<!-- index.vue page user threads -->
-
 <template>
   <div class="ma-6">
     <v-card class="d-flex justify-space-between mb-5" flat tile>

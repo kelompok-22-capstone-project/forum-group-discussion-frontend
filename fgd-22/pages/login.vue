@@ -29,7 +29,7 @@
                           color="blue"
                           autocomplete="false"
                           class="mt-16"
-                          v-model="username"
+                          v-model="login.username"
                         />
 
                         <v-text-field
@@ -40,7 +40,7 @@
                           color="blue"
                           autocomplete="false"
                           type="password"
-                          v-model="password"
+                          v-model="login.password"
                         />
 
                         <v-row>
@@ -88,75 +88,46 @@ export default {
   name: "LoginPage",
   data: () => ({
     valid: true,
-    username: "",
+    login: {
+      username: "",
+      password: "",
+    },
     userRules: [(v) => !!v || "email can not be empty"],
-    password: "",
     passRules: [
       (v) => !!v || "Password is require",
-      (v) => (v && v.length >= 8) || "Name must be less than 10 characters",
+      (v) => (v && v.length >= 8) || "Name must be less than 8 characters",
     ],
     checkbox: false,
   }),
 
-  // httpHeaders: () => ({
-  //   "Content-Type": "application/json",
-  //   "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
-  // }),
-
   methods: {
     async handleLoginClicked() {
-      // const user = {
-      //   username: this.username,
-      //   password: this.password,
-      // };
-
-      //       console.log(this.username);
-      //       console.log(this.password);
-
-      //       var url = "https://moot-rest-api.herokuapp.com/api/v1/login";
-
-      //       var xhr = new XMLHttpRequest();
-      //       xhr.open("POST", url);
-
-      //       xhr.setRequestHeader("accept", "application/json");
-      //       xhr.setRequestHeader(
-      //         "API-Key",
-      //         "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j"
-      //       );
-      //       xhr.setRequestHeader("Content-Type", "application/json");
-
-      //       xhr.onreadystatechange = function () {
-      //         if (xhr.readyState === 4) {
-      //           console.log(xhr.status);
-      //           console.log(xhr.responseText);
-      //         }
-      //       };
-
-      //       var data = `{
-      //   "username": "admin",
-      //   "password": "kelompok22"
-      // }`;
-
-      //       xhr.send(data);
-
-      try {
-        const response = await this.$auth.loginWith(
-          "local",
-          { username: "admin", password: "kelompok22" },
-          {
-            headers: {
-              "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
-              "Content-Type": "application/json",
-            },
+      const response = await this.$auth
+        .loginWith("local", {
+          data: this.login,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.data.role === "user") {
+            res.status;
+            let role = res.data.data.role;
+            // this.$store.commit("login/SET_USER_ROLE", role);
+            localStorage.setItem("role", role);
+            this.$router.push("/");
+          } else {
+            res.status;
+            let role = res.data.data.role;
+            // this.$store.commit("login/SET_USER_ROLE", role);
+            localStorage.setItem("role", role);
+            this.$router.push("/admin/dashboard");
           }
-        );
-        console.log(response);
-        if (response.data.success) {
-          this.$router.replace({ name: "user" });
-        }
-      } catch (err) {
-        console.log(err);
-      }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("login failed");
+          return false;
+        });
+      response;
     },
   },
 };

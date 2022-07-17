@@ -34,7 +34,7 @@
                             v-model="email"
                           />
                           <v-text-field
-                            label="Display Name"
+                            label="Name"
                             outlined
                             dense
                             placeholder="e.g Calry Nimbu"
@@ -93,7 +93,7 @@
                           have an moot account?
                         </h5>
 
-                        <router-link to="/">
+                        <router-link to="/login">
                           <v-btn color="error" dark block>LOGIN</v-btn>
                         </router-link>
                       </v-col>
@@ -126,7 +126,7 @@ export default {
     ],
     passRules: [
       (v) => !!v || "**Require: 8 latters",
-      (v) => (v && v.length >= 8) || "Name must be less than 10 characters",
+      (v) => (v && v.length >= 8) || "Name must be less than 8 characters",
     ],
     email: "",
     emailRules: [
@@ -171,6 +171,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          alert("Register Failed, Try again")
           return false;
           // alert("Register Failed");
         });

@@ -1,17 +1,11 @@
 <template>
-  <v-app>
-    <div class="ma-8">
-      <h1>{{ $route.params.category }}</h1>
-      <div v-for="list in categoryList" :key="list.ID">
-        <div v-if="$route.params.category === list.name">
-          <p>{{ list.description }}</p>
-        </div>
-      </div>
-    </div>
-
-    <div v-for="thread in threads" :key="thread.categoryName">
-      <div v-if="thread.categoryName === $route.params.category">
-      
+  <div class="ma-8">
+    <div v-if="threadsLength > 0">
+      <h2 style="color: grey">
+        This is all relevan thread with "
+        {{ this.$store.state.general.search.searchThread }} "
+      </h2>
+      <div v-for="thread in threads" :key="thread.ID">
         <v-card
           class="mx-auto mr-8 ml-8 mt-6 pa-4 rounded-lg"
           elevation="5"
@@ -100,49 +94,57 @@
         </v-card>
       </div>
     </div>
-  </v-app>
+    <div v-else>
+      <v-card flat class="mx-auto my-16" max-width="370">
+        <v-card flat class="d-flex justify-center mb-3">
+          <img src="/img/notFound.svg" />
+        </v-card>
+        <v-card flat class="d-flex justify-center pa-3">
+          <h2 style="color:grey">No result for "{{this.$store.state.general.search.searchThread}}"</h2>
+        </v-card>
+        <v-card  flat class="d-flex justify-center">
+          <p style="color:grey" class="text-center">We couldn not find what you searched for. Try searching again.</p>
+        </v-card>
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  layout: "deafult",
-  name: "category",
+  layout: "default",
   data() {
     return {
       threads: [],
+      threadsLength: "",
     };
   },
 
   async created() {
     await this.$axios
-      .$get(`/guest/threads`, {
-        headers: {
-          "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
-          "Content-Type": "application/json",
-        },
-      })
+      .$get(
+        `/guest/threads?search=${this.$store.state.general.search.searchThread}`,
+        {
+          headers: {
+            "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data.list);
+        this.threadsLength = res.data.list.length;
         this.threads = res.data.list;
       })
       .catch((err) => {
         console.log(err);
+        alert("Create Thread Failed");
       });
-  },
-  computed: {
-    categoryList() {
-      return this.$store.state.general.getcategory.category;
-    },
-  },
-
-  mounted() {
-    this.$store.dispatch("general/getcategory/getCategoriesData");
-    return console.log("call success");
   },
 };
 </script>
 
-<style scope>
+<style scoped>
 .no-uppercase {
   text-transform: unset !important;
 }

@@ -1,5 +1,3 @@
-<!-- // detail.vue page admin reportPage -->
-
 <template>
   <div class="ma-8">
     <v-card class="d-flex justify-space-between mb-16" flat tile>
@@ -146,4 +144,3 @@ export default {
 </script>
 
 <style></style>
- 
