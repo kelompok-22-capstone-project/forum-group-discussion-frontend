@@ -49,7 +49,7 @@
                 <v-btn
                   text
                   color="error"
-                  :value="report.ID"
+                  :value="report.username"
                   @click.stop="dialog = true"
                 >
                   <v-icon color="error">mdi-delete-outline</v-icon>
@@ -120,7 +120,7 @@ export default {
   methods: {
     async ban() {
       const response = await this.$axios
-        .$put(`/users/${this.selected}/banned`, {
+        .$put(`/users/${this.selected}/banned`,{}, {
           headers: {
             "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
             "Content-Type": "application/json",

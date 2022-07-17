@@ -11,10 +11,16 @@
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>
-              <v-btn plain text class="justify-start pa-1 no-uppercase">
-                <h4>
-                  {{ thread.creatorUsername }}
-                </h4>
+              <v-btn
+                plain
+                text
+                class="justify-start pa-1 no-uppercase"
+                :to="{
+                  name: 'user-profile',
+                  params: { index: thread.creatorUsername },
+                }"
+              >
+                {{ thread.creatorUsername }}
               </v-btn>
             </v-list-item-title>
             <v-list-item-subtitle>
@@ -31,7 +37,15 @@
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>
-              <v-btn plain text class="justify-start pa-1 no-uppercase">
+              <v-btn
+                plain
+                text
+                class="justify-start pa-1 no-uppercase"
+                :to="{
+                  name: 'user-profile',
+                  params: { index: thread.creatorUsername },
+                }"
+              >
                 <h4>
                   {{ thread.creatorUsername }}
                 </h4>
@@ -223,7 +237,15 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-btn plain text class="justify-start pa-1 no-uppercase">
+              <v-btn
+                plain
+                text
+                class="justify-start pa-1 no-uppercase"
+                :to="{
+                  name: 'user-profile',
+                  params: { index: comment.username },
+                }"
+              >
                 {{ comment.username }}
               </v-btn>
             </v-list-item-content>

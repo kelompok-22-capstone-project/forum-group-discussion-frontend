@@ -1,7 +1,8 @@
-export default function() {
+// isAdmin.js
 
-    if(this.$store.state.login.role != "admin") {
-        return this.$router.push("/");
+export default function({ $auth, redirect }) {
+    //check loggedIn "false"
+    if(!$auth.loggedIn) {
+        return redirect('/login')
     }
-
 }

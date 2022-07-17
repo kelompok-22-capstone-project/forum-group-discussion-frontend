@@ -122,7 +122,7 @@ export default {
   methods: {
     async ban() {
       const response = await this.$axios
-        .$put(`/users/${this.selected}/banned`, {
+        .$put(`/users/${this.$route.params.report}/banned`,{}, {
           headers: {
             "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
             "Content-Type": "application/json",
@@ -131,7 +131,7 @@ export default {
         .then((res) => {
           console.log(res);
           alert("Ban User Success");
-          location.reload();
+          this.$router.push("/admin/report");
         })
         .catch((err) => {
           console.log(err);
