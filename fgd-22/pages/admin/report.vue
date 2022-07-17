@@ -99,6 +99,7 @@
 export default {
   name: "adminReportPage",
   layout: "admin",
+  middleware:'isAdmin',
   data() {
     return {
       dialog: false,
