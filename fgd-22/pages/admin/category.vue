@@ -90,6 +90,7 @@
 export default {
   name: "adminCategoryPage",
   layout: "admin",
+  middleware:'isAdmin',
   data() {
     return {
       page: 9,
