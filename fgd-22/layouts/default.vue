@@ -55,7 +55,16 @@
           </v-list-item-avatar>
           <div v-if="role === 'user'">
             <v-list-item-content>
-              <v-card flat class="overflow-auto" width="150" link>
+              <v-card
+                flat
+                class="overflow-auto"
+                width="150"
+                link
+                :to="{
+                  name: 'user-profile',
+                  params: { index: myUsername },
+                }"
+              >
                 <v-list-item-title class="font-weight-medium">{{
                   myUsername
                 }}</v-list-item-title>

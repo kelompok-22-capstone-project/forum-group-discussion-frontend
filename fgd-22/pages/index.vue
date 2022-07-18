@@ -99,8 +99,15 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-btn plain text class="justify-start pa-1 no-uppercase"
-              :to="{ name: 'user-profile', params: { index: thread.creatorUsername } }">
+              <v-btn
+                plain
+                text
+                class="justify-start pa-1 no-uppercase"
+                :to="{
+                  name: 'user-profile',
+                  params: { index: thread.creatorUsername },
+                }"
+              >
                 {{ thread.creatorUsername }}
               </v-btn>
             </v-list-item-content>
@@ -119,18 +126,19 @@
           </v-list-item>
         </v-card-actions>
 
-        <v-btn
-          plain
-          text
-          class="text-h8 font-weight-bold no-uppercase"
-          :to="{
-            name: 'user-threads',
-            params: { index: thread.ID },
-          }"
-        >
-          {{ thread.description }}
-        </v-btn>
-
+        <v-card class="overflow-hidden" flat>
+          <v-btn
+            plain
+            text
+            class="text-h8 font-weight-bold no-uppercase"
+            :to="{
+              name: 'user-threads',
+              params: { index: thread.ID },
+            }"
+          >
+            {{ thread.description }}
+          </v-btn>
+        </v-card>
         <v-card-actions>
           <v-row>
             <v-col cols="1" class="mr-2">
