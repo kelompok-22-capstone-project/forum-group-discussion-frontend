@@ -32,7 +32,7 @@
                 class="no-uppercase pa-0 justify-start"
                 :to="{
                   name: 'admin-reportPage-detail',
-                  params: { report: report.ID },
+                  params: { report: report.username },
                 }"
               >
                 {{ report.reason }}
