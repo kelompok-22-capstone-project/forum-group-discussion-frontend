@@ -100,7 +100,6 @@
 export default {
   name: "adminThreadPage",
   layout: "admin",
-  middleware:'isAdmin',
   data() {
     return {
       dialog: false,
