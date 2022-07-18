@@ -12,8 +12,7 @@
             </v-card>
 
             <v-list-item-content>
-              <v-list-item-title class="text-h5 mb-1"
-                >User 1
+              <v-list-item-title class="text-h4 mb-2 font-weight-black">User 1
               </v-list-item-title>
               <v-list-item-subtitle>@user1</v-list-item-subtitle>
             </v-list-item-content>

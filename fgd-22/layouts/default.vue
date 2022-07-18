@@ -114,14 +114,17 @@
       </div>
 
       <v-hover>
+        <router-link to="/user/rangking">
         <v-btn
           width="225px"
           elevation="0"
           class="justify-start rounded-lg no-uppercase btn-hover mb-6"
+          
         >
           <v-icon>mdi-crown-outline</v-icon>
           <span class="ml-4">Ranking</span>
         </v-btn>
+        </router-link>
       </v-hover>
       <v-hover>
         <v-dialog max-width="1000px" v-model="dialog">
