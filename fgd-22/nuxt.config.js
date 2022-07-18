@@ -37,32 +37,46 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "@nuxtjs/auth",
-    '@nuxtjs/proxy'
+    "@nuxtjs/proxy",
+    "nuxt-custom-headers",
   ],
 
   auth: {
     auth: {
       redirect: {
-        login: '/login',
-        home: '/'
-      }
+        login: "/login",
+        home: "/",
+      },
     },
     strategies: {
       local: {
         endpoints: {
           login: {
-            url: "https://moot-rest-api.herokuapp.com/api/v1/login",
+            url: "/login",
+            headers: {
+              "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+              "Content-Type": "application/json",
+            },  
             method: "post",
             propertyName: "data.token",
           },
-          register: {
-            url: "https://moot-rest-api.herokuapp.com/api/v1/register",
-            method: "post",
-            propertyName: "data.userID",
+          user: {
+            url: "/users",
+            method: "get",
+            headers: {
+              "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+              "Content-Type": "application/json",
+            },
           },
-          logout: { url: "/api/auth/logout", method: "post" },
-          user: { url: "/api/auth/user", method: "get", propertyName: "user" },
+          logout: {
+            url: "/auth/logout",
+            method: "get",
+          },
         },
+        token: {
+          property: "data.token",
+        },
+
       },
     },
   },
@@ -70,12 +84,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: "/",
-    proxy : true
-  },
-
-  proxy: {
-    '/api/': { target: 'https://moot-rest-api.herokuapp.com/api/v1', pathRewrite: {'^/api/': ''}, changeOrigin: true }
+    baseURL: "https://moot-rest-api.herokuapp.com/api/v1",
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

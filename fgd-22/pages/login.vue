@@ -29,7 +29,7 @@
                           color="blue"
                           autocomplete="false"
                           class="mt-16"
-                          v-model="username"
+                          v-model="login.username"
                         />
 
                         <v-text-field
@@ -40,7 +40,7 @@
                           color="blue"
                           autocomplete="false"
                           type="password"
-                          v-model="password"
+                          v-model="login.password"
                         />
 
                         <v-row>
@@ -88,34 +88,49 @@ export default {
   name: "LoginPage",
   data: () => ({
     valid: true,
-    username: "",
+    login: {
+      username: "",
+      password: "",
+    },
     userRules: [(v) => !!v || "email can not be empty"],
-    password: "",
     passRules: [
       (v) => !!v || "Password is require",
-      (v) => (v && v.length >= 8) || "Name must be less than 10 characters",
+      (v) => (v && v.length >= 8) || "Name must be less than 8 characters",
     ],
     checkbox: false,
   }),
+
   methods: {
     async handleLoginClicked() {
-      // const user = {
-      //   username: this.username,
-      //   password: this.password,
-      // };
-
-      try {
-        const response = await this.$auth.loginWith("local", {data:{username: this.username, password: this.password} },);
-        console.log(response);
-        if (response.data.success) {
-          this.$router.replace({ name: "admin" });
-        }
-      } catch (err) {
-        console.log(err);
-      }
+      const response = await this.$auth
+        .loginWith("local", {
+          data: this.login,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.data.role === "user") {
+            res.status;
+            let role = res.data.data.role;
+            // this.$store.commit("login/SET_USER_ROLE", role);
+            localStorage.setItem("role", role);
+            this.$router.push("/");
+          } else {
+            res.status;
+            let role = res.data.data.role;
+            // this.$store.commit("login/SET_USER_ROLE", role);
+            localStorage.setItem("role", role);
+            this.$router.push("/admin/dashboard");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("login failed");
+          return false;
+        });
+      response;
     },
   },
-};  
+};
 </script>
 
 <style scoped>

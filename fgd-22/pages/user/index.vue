@@ -9,5 +9,4 @@ export default {
   middleware: 'auth'
 }
 </script>
-
 <style lang="css" scoped></style>

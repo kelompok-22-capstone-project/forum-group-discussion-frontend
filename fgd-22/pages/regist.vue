@@ -34,7 +34,7 @@
                             v-model="email"
                           />
                           <v-text-field
-                            label="Display Name"
+                            label="Name"
                             outlined
                             dense
                             placeholder="e.g Calry Nimbu"
@@ -78,7 +78,7 @@
                             dark
                             block
                             elevation="5"
-                            @click="validate"
+                            @click.prevent="validate"
                             >Register</v-btn
                           >
                         </v-form>
@@ -93,7 +93,7 @@
                           have an moot account?
                         </h5>
 
-                        <router-link to="/">
+                        <router-link to="/login">
                           <v-btn color="error" dark block>LOGIN</v-btn>
                         </router-link>
                       </v-col>
@@ -126,7 +126,7 @@ export default {
     ],
     passRules: [
       (v) => !!v || "**Require: 8 latters",
-      (v) => (v && v.length >= 8) || "Name must be less than 10 characters",
+      (v) => (v && v.length >= 8) || "Name must be less than 8 characters",
     ],
     email: "",
     emailRules: [
@@ -141,22 +141,39 @@ export default {
     password: "",
   }),
 
+  // httpHeaders: () => ({
+  //   "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+  //   "Content-Type": "application/json",
+  // }),
+
   methods: {
     async validate() {
       const response = await this.$axios
-        .$post("https://moot-rest-api.herokuapp.com/api/v1/register", {
-          username: this.username,
-          email: this.email,
-          name: this.name,
-          password: this.password,
-        })
+        .$post(
+          "/register",
+          {
+            username: this.username,
+            email: this.email,
+            name: this.name,
+            password: this.password,
+          },
+          {
+            headers: {
+              "API-Key": "2ry3HBOBLi1YkCma49pdnH3RpMguwgNZ1bvU2eqCOzZg2y0g2j",
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
-          alert("Register Success");
+          this.$router.push('/login')
+          // alert("Register Success");
         })
         .catch((err) => {
           console.log(err);
-          alert("Register Failed")
+          alert("Register Failed, Try again")
+          return false;
+          // alert("Register Failed");
         });
       console.log(response);
     },
