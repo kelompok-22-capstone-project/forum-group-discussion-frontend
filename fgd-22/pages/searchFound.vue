@@ -47,18 +47,19 @@
             </v-list-item>
           </v-card-actions>
 
-          <v-btn
-            plain
-            text
-            class="text-h8 font-weight-bold no-uppercase"
-            :to="{
-              name: 'user-threads',
-              params: { index: thread.ID },
-            }"
-          >
-            {{ thread.description }}
-          </v-btn>
-
+          <v-card class="overflow-hidden" flat>
+            <v-btn
+              plain
+              text
+              class="text-h8 font-weight-bold no-uppercase"
+              :to="{
+                name: 'user-threads',
+                params: { index: thread.ID },
+              }"
+            >
+              {{ thread.description }}
+            </v-btn>
+          </v-card>
           <v-card-actions>
             <v-row>
               <v-col cols="1" class="mr-2">
@@ -100,10 +101,14 @@
           <img src="/img/notFound.svg" />
         </v-card>
         <v-card flat class="d-flex justify-center pa-3">
-          <h2 style="color:grey">No result for "{{this.$store.state.general.search.searchThread}}"</h2>
+          <h2 style="color: grey">
+            No result for "{{ this.$store.state.general.search.searchThread }}"
+          </h2>
         </v-card>
-        <v-card  flat class="d-flex justify-center">
-          <p style="color:grey" class="text-center">We couldn not find what you searched for. Try searching again.</p>
+        <v-card flat class="d-flex justify-center">
+          <p style="color: grey" class="text-center">
+            We couldn not find what you searched for. Try searching again.
+          </p>
         </v-card>
       </v-card>
     </div>

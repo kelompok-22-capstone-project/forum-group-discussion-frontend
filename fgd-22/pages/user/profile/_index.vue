@@ -87,17 +87,19 @@
               </v-list-item>
             </v-card-actions>
 
-            <v-btn
-              plain
-              text
-              class="text-h8 font-weight-bold no-uppercase"
-              :to="{
-                name: 'user-threads',
-                params: { index: thread.ID },
-              }"
-            >
-              {{ thread.description }}
-            </v-btn>
+            <v-card class="overflow-hidden" flat>
+              <v-btn
+                plain
+                text
+                class="text-h8 font-weight-bold no-uppercase"
+                :to="{
+                  name: 'user-threads',
+                  params: { index: thread.ID },
+                }"
+              >
+                {{ thread.description }}
+              </v-btn>
+            </v-card>
 
             <v-card-actions>
               <v-row>
