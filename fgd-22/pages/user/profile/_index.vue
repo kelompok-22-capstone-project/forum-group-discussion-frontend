@@ -236,6 +236,7 @@
               </v-list-item>
             </v-card-actions>
 
+            <v-card class="overflow-hidden" flat>
             <v-btn
               plain
               text
@@ -247,6 +248,7 @@
             >
               {{ thread.description }}
             </v-btn>
+            </v-card>
 
             <v-card-actions>
               <v-row>
